@@ -80,7 +80,6 @@ public class CheckingActivity implements Runnable {
         PrintWriter out = null;
         for (Map.Entry<String, Socket> entry : clientsSockets.entrySet()) {
             var name = entry.getKey();
-            System.out.println(name + " " + value);
             if (name.equals(value)){
                 var valueSocket = entry.getValue();
                 out = new PrintWriter(valueSocket.getOutputStream(), true, UTF_8);

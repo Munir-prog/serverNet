@@ -2,15 +2,17 @@ com/mprog/utill/PropertiesUtil.java
  com.mprog.utill.PropertiesUtil
 com/mprog/utill/Logger.java
  com.mprog.utill.Logger
+com/mprog/CheckingActivity.java
+ com.mprog.CheckingActivity
+com/mprog/EchoProtocol.java
+ com.mprog.EchoProtocol
+com/mprog/SessionSocketServer.java
+ com.mprog.SessionSocketServer
+com/mprog/App.java
+ com.mprog.App
+com/mprog/serialization/Message.java
+ com.mprog.serialization.Message
 com/mprog/settings/Settings.java
  com.mprog.settings.Settings
 com/mprog/Test.java
  com.mprog.Test
-com/mprog/App.java
- com.mprog.App
-com/mprog/EchoProtocol.java
- com.mprog.EchoProtocol
-com/mprog/CheckingActivity.java
- com.mprog.CheckingActivity
-com/mprog/SessionSocketServer.java
- com.mprog.SessionSocketServer

@@ -16,5 +16,5 @@ public class Message implements Serializable {
 
 //    private final LocalDateTime timestamp = LocalDateTime.now();
 //    private final SocketAddress target = Settings.ADDRESS;
-    private final String message;
+//    private final String message;
 }
