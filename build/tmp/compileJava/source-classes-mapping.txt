@@ -1,18 +1,48 @@
+com/mprog/dto/UserDto.java
+ com.mprog.dto.UserDto
+ com.mprog.dto.UserDto$UserDtoBuilder
+com/mprog/service/UserService.java
+ com.mprog.service.UserService
+com/mprog/entity/User.java
+ com.mprog.entity.User
+ com.mprog.entity.User$UserBuilder
+com/mprog/service/MessageService.java
+ com.mprog.service.MessageService
 com/mprog/utill/PropertiesUtil.java
  com.mprog.utill.PropertiesUtil
-com/mprog/utill/Logger.java
- com.mprog.utill.Logger
+com/mprog/dao/MessageDao.java
+ com.mprog.dao.MessageDao
 com/mprog/CheckingActivity.java
  com.mprog.CheckingActivity
-com/mprog/EchoProtocol.java
- com.mprog.EchoProtocol
+com/mprog/utill/ConnectionManager.java
+ com.mprog.utill.ConnectionManager
+com/mprog/entity/Message.java
+ com.mprog.entity.Message
+ com.mprog.entity.Message$MessageBuilder
 com/mprog/SessionSocketServer.java
  com.mprog.SessionSocketServer
-com/mprog/App.java
- com.mprog.App
 com/mprog/serialization/Message.java
  com.mprog.serialization.Message
+com/mprog/dto/MessageDto.java
+ com.mprog.dto.MessageDto
+ com.mprog.dto.MessageDto$MessageDtoBuilder
 com/mprog/settings/Settings.java
  com.mprog.settings.Settings
+com/mprog/mapper/UserMapper.java
+ com.mprog.mapper.UserMapper
+com/mprog/utill/Logger.java
+ com.mprog.utill.Logger
+com/mprog/mapper/Mapper.java
+ com.mprog.mapper.Mapper
+com/mprog/EchoProtocol.java
+ com.mprog.EchoProtocol
+com/mprog/App.java
+ com.mprog.App
+com/mprog/mapper/MessageMapper.java
+ com.mprog.mapper.MessageMapper
+com/mprog/dao/Dao.java
+ com.mprog.dao.Dao
+com/mprog/dao/UserDao.java
+ com.mprog.dao.UserDao
 com/mprog/Test.java
  com.mprog.Test

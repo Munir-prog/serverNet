@@ -1,4 +1,4 @@
-package com.mprog;
+package com.mprog.service;
 
 import com.mprog.utill.PropertiesUtil;
 

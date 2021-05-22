@@ -1,4 +1,6 @@
-package com.mprog;
+package com.mprog.service;
+
+import com.mprog.dto.MessageDto;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -12,6 +14,7 @@ import java.util.Map;
 
 public class EchoProtocol implements Runnable{
 
+    private final MessageService messageService = MessageService.getInstance();
     private  PrintWriter clientOut;
     private BufferedReader clientIn;
     private final SessionSocketServer sessionSocketServer;
@@ -38,6 +41,7 @@ public class EchoProtocol implements Runnable{
         clientIn = new BufferedReader(new InputStreamReader(socket.getInputStream(),
                 StandardCharsets.UTF_8));
 
+        showHistoryOfMessages(clientOut);
         while (!socket.isClosed()) {
             Thread.sleep(1000L);
             if (clientIn.ready()) {
@@ -47,12 +51,22 @@ public class EchoProtocol implements Runnable{
         }
     }
 
+    private void showHistoryOfMessages(PrintWriter clientOut) {
+        var history = messageService.getHistory();
+        history.forEach(messageDto -> clientOut.println(messageDto.getMessage()));
+    }
+
     private void checkMessageForResponse(String msg) {
         if (msg.startsWith("response:")) {
             response = msg;
         } else {
             var name = findName();
             if (!msg.equals("")) {
+                //
+                var messageDto = MessageDto.builder()
+                        .message(msg)
+                        .build();
+                messageService.create(messageDto);
                 mailMessages(msg, name);
             }
         }
