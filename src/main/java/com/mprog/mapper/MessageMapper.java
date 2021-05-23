@@ -9,7 +9,7 @@ import static lombok.AccessLevel.PRIVATE;
 @NoArgsConstructor(access = PRIVATE)
 public class MessageMapper implements Mapper<MessageDto, Message>{
 
-    public static final MessageMapper INSTANCE = new MessageMapper();
+    private static final MessageMapper INSTANCE = new MessageMapper();
 
     @Override
     public Message mapFrom(MessageDto object) {
