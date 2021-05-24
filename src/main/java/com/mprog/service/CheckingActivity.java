@@ -93,8 +93,7 @@ public class CheckingActivity implements Runnable {
         return true;
     }
 
-    private boolean waitFifteenSec() throws InterruptedException {
+    private void waitFifteenSec() throws InterruptedException {
         Thread.sleep(timeOut);
-        return true;
     }
 }

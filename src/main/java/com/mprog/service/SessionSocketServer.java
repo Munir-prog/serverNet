@@ -62,19 +62,29 @@ public class SessionSocketServer implements Runnable {
 
         while (true) {
             clientOut.println("Choose option (1. Register or 2. Login)");
-            var s =  clientIn.readLine();
-            registrationAndLoginIndex = Integer.parseInt(s);
+            var s = clientIn.readLine();
+            // ERROR of parsing NumberFormatException
+            registrationAndLoginIndex = parseStringToInteger(s);
             if (registrationAndLoginIndex == 1) {
                 registerClient();
                 loginClient();
             } else if (registrationAndLoginIndex == 2) {
                 loginClient();
             }
-            if (registrationAndLoginIndex == 1 || registrationAndLoginIndex == 2){
+            if (registrationAndLoginIndex == 1 || registrationAndLoginIndex == 2) {
                 return;
             }
         }
     }
+
+    private static int parseStringToInteger(String s) {
+        try {
+            return Integer.parseInt(s);
+        }catch (NumberFormatException e){
+            return 0;
+        }
+    }
+
     @SneakyThrows
     private static void registerClient() {
         clientOut.println("    * * *  Welcome To Registration  * * *  Email >  ");
@@ -121,22 +131,19 @@ public class SessionSocketServer implements Runnable {
         clientsSockets.put(clientName, clientSocket);
     }
 
+    @SneakyThrows
     private String getClientName(Socket clientSocket) {
         String name = null;
-        try {
-            var out = new PrintWriter(clientSocket.getOutputStream(), true,
-                    StandardCharsets.UTF_8);
-            var in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream(),
-                    StandardCharsets.UTF_8));
-
-            out.println("Login. Input username: ");
-            while (name == null) {
-                if (in.ready()) {
-                    name = in.readLine();
-                }
+        //TODO "CC"
+//            var out = new PrintWriter(clientSocket.getOutputStream(), true,
+//                    StandardCharsets.UTF_8);
+//            var in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream(),
+//                    StandardCharsets.UTF_8));
+        clientOut.println("Login. Input username: ");
+        while (name == null) {
+            if (clientIn.ready()) {
+                name = clientIn.readLine();
             }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
         return name;
     }
