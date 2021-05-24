@@ -82,7 +82,7 @@ public class EchoProtocol implements Runnable{
     }
 
     private String findName() {
-        String userName = "someName";
+        String userName = null;
         var optionalUserName = sessionSocketServer.getClientsName().entrySet().stream()
                 .filter(value -> value.getKey().equals(this))
                 .map(Map.Entry::getValue)
