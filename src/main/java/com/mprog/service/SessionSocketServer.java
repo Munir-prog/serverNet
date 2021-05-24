@@ -123,7 +123,7 @@ public class SessionSocketServer implements Runnable {
     }
 
     private void startClient(Socket clientSocket) {
-        var clientName = getClientName(clientSocket);
+        var clientName = getClientName();
         EchoProtocol echoProtocol = new EchoProtocol(this, clientSocket);
         var thread = new Thread(echoProtocol);
         thread.start();
@@ -132,7 +132,7 @@ public class SessionSocketServer implements Runnable {
     }
 
     @SneakyThrows
-    private String getClientName(Socket clientSocket) {
+    private String getClientName() {
         String name = null;
         //TODO "CC"
 //            var out = new PrintWriter(clientSocket.getOutputStream(), true,
