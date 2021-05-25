@@ -59,7 +59,7 @@ public class EchoProtocol implements Runnable {
         }
     }
 
-    private boolean pushToDbAndMail(String msg, String name) {
+    protected boolean pushToDbAndMail(String msg, String name) {
         if (!msg.equals("")) {
             //
             var messageDto = MessageDto.builder()
@@ -77,7 +77,7 @@ public class EchoProtocol implements Runnable {
         history.forEach(messageDto -> clientOut.println(messageDto.getMessage()));
     }
 
-    private boolean checkMessageForResponse(String msg) {
+    protected boolean checkMessageForResponse(String msg) {
         if (msg.startsWith("response:")) {
             response = msg;
             return true;
@@ -103,7 +103,7 @@ public class EchoProtocol implements Runnable {
 //        }
 //    }
 
-    private void mailMessages(String msg, String name) {
+    protected void mailMessages(String msg, String name) {
         sessionSocketServer.getClientsName()
                 .keySet()
                 .stream()

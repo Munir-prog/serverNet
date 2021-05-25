@@ -1,4 +1,4 @@
 com/mprog/service/SessionSocketServerTest.java
  com.mprog.service.SessionSocketServerTest
-com/mprog/service/CheckingActivityTest.java
- com.mprog.service.CheckingActivityTest
+com/mprog/service/EchoProtocolTest.java
+ com.mprog.service.EchoProtocolTest
