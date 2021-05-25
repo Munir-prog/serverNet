@@ -45,7 +45,7 @@ class SessionSocketServerTest {
     @Test
     void givenString_whenParseStringToInteger_thenReturnInteger(){
         String test = "123";
-        var result = SessionSocketServer.parseStringToInteger(test);
+        var result = sss.parseStringToInteger(test);
         Assertions.assertThat(result).isEqualTo(123);
     }
 

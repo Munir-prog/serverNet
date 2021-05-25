@@ -44,8 +44,8 @@ public class SessionSocketServer implements Runnable {
         threadForActivity.start();
     }
 
-
-    private void acceptClients(ServerSocket serverSocket) throws IOException {
+    @SneakyThrows
+    private void acceptClients(ServerSocket serverSocket) {
         while (true) {
             var clientSocket = serverSocket.accept();
             authenticateClient(clientSocket);
@@ -77,7 +77,7 @@ public class SessionSocketServer implements Runnable {
         }
     }
 
-    protected static int parseStringToInteger(String s) {
+    protected  int parseStringToInteger(String s) {
         try {
             return Integer.parseInt(s);
         } catch (NumberFormatException e) {
