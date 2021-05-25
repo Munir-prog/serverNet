@@ -10,15 +10,23 @@ repositories {
 }
 
 dependencies {
+    implementation 'org.projectlombok:lombok:1.18.18'
+
     //Lombok
     compileOnly 'org.projectlombok:lombok:1.18.20'
     annotationProcessor 'org.projectlombok:lombok:1.18.20'
+    testImplementation 'org.projectlombok:lombok:1.18.20'
 
     //postgresql
     implementation group: 'org.postgresql', name: 'postgresql', version: '42.2.20'
 
     //jUnit5
     testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.8.0-M1'
+    testImplementation group: 'org.assertj', name: 'assertj-core', version: '3.19.0'
+
+    //Mockito
+    testImplementation group: 'org.mockito', name: 'mockito-core', version: '3.10.0'
+    testImplementation group: 'org.mockito', name: 'mockito-junit-jupiter', version: '3.10.0'
 
 }
 

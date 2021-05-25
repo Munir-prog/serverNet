@@ -25,20 +25,24 @@ public class SessionSocketServer implements Runnable {
     private static BufferedReader clientIn;
     private static int registrationAndLoginIndex = 0;
 
+    public SessionSocketServer(PrintWriter clientOut, BufferedReader clientIn){
+        SessionSocketServer.clientOut = clientOut;
+        SessionSocketServer.clientIn = clientIn;
+    }
     @Override
     public void run() {
         clientsName = new HashMap<>();
         clientsSockets = new HashMap<>();
         try (ServerSocket serverSocket = new ServerSocket()) {
             serverSocket.bind(ADDRESS);
-            checkClientsActivity(clientsName);
+            startCheckingClientsActivity(clientsName);
             acceptClients(serverSocket);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private void checkClientsActivity(Map<EchoProtocol, String> clientsName) {
+    private void startCheckingClientsActivity(Map<EchoProtocol, String> clientsName) {
         var checkingActivity = new CheckingActivity(this);
         var threadForActivity = new Thread(checkingActivity);
         threadForActivity.start();
@@ -80,7 +84,7 @@ public class SessionSocketServer implements Runnable {
     private static int parseStringToInteger(String s) {
         try {
             return Integer.parseInt(s);
-        }catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             return 0;
         }
     }
@@ -132,21 +136,21 @@ public class SessionSocketServer implements Runnable {
     }
 
     @SneakyThrows
-    private String getClientName() {
+    String getClientName() {
         String name = null;
-        //TODO "CC"
+
+        clientOut.println("Login. Input username: ");
+        while (name == null) {
+            name = clientIn.readLine();
+        }
+        return name;
+    }
+
+    //TODO "CC"
 //            var out = new PrintWriter(clientSocket.getOutputStream(), true,
 //                    StandardCharsets.UTF_8);
 //            var in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream(),
 //                    StandardCharsets.UTF_8));
-        clientOut.println("Login. Input username: ");
-        while (name == null) {
-            if (clientIn.ready()) {
-                name = clientIn.readLine();
-            }
-        }
-        return name;
-    }
 
     public Map<EchoProtocol, String> getClientsName() {
         return clientsName;
@@ -155,5 +159,6 @@ public class SessionSocketServer implements Runnable {
     public Map<String, Socket> getClientsSockets() {
         return clientsSockets;
     }
+
 }
 
