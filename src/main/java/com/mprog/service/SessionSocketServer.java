@@ -18,17 +18,13 @@ import static com.mprog.utill.Logger.log;
 
 public class SessionSocketServer implements Runnable {
 
-    private static final UserService userService = UserService.getInstance();
+    private  final UserService userService = UserService.getInstance();
     private Map<EchoProtocol, String> clientsName;
     private Map<String, Socket> clientsSockets;
-    private static PrintWriter clientOut;
-    private static BufferedReader clientIn;
-    private static int registrationAndLoginIndex = 0;
+    private  PrintWriter clientOut;
+    private  BufferedReader clientIn;
+    private  int registrationAndLoginIndex = 0;
 
-    public SessionSocketServer(PrintWriter clientOut, BufferedReader clientIn){
-        SessionSocketServer.clientOut = clientOut;
-        SessionSocketServer.clientIn = clientIn;
-    }
     @Override
     public void run() {
         clientsName = new HashMap<>();
@@ -58,7 +54,7 @@ public class SessionSocketServer implements Runnable {
     }
 
     @SneakyThrows
-    private static void authenticateClient(Socket clientSocket) {
+    private void authenticateClient(Socket clientSocket) {
         clientOut = new PrintWriter(clientSocket.getOutputStream(), true,
                 StandardCharsets.UTF_8);
         clientIn = new BufferedReader(new InputStreamReader(clientSocket.getInputStream(),
@@ -90,7 +86,7 @@ public class SessionSocketServer implements Runnable {
     }
 
     @SneakyThrows
-    private static void registerClient() {
+    private  void registerClient() {
         clientOut.println("    * * *  Welcome To Registration  * * *  Email >  ");
         var email = clientIn.readLine();
         clientOut.println("\nPassword > ");
@@ -104,7 +100,7 @@ public class SessionSocketServer implements Runnable {
     }
 
     @SneakyThrows
-    private static void loginClient() {
+    private void loginClient() {
 
         clientOut.println("    * * *  Welcome To Login  * * * Email > ");
         var em = clientIn.readLine();
@@ -112,16 +108,16 @@ public class SessionSocketServer implements Runnable {
         var pas = clientIn.readLine();
         var userLogin = userService.login(em, pas);
         userLogin.ifPresentOrElse(
-                SessionSocketServer::onLoginSuccess,
-                SessionSocketServer::onLoginFail
+                this::onLoginSuccess,
+                this::onLoginFail
         );
     }
 
-    private static void onLoginSuccess(UserDto userDto) {
+    private void onLoginSuccess(UserDto userDto) {
         log("connected " + userDto.toString());
     }
 
-    private static void onLoginFail() {
+    private  void onLoginFail() {
         clientOut.println("No such client!\nPlease retry!");
         registrationAndLoginIndex = 0;
     }
