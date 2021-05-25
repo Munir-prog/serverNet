@@ -34,11 +34,11 @@ com/mprog/utill/Logger.java
  com.mprog.utill.Logger
 com/mprog/mapper/Mapper.java
  com.mprog.mapper.Mapper
+com/mprog/App.java
+ com.mprog.App
 com/mprog/service/SessionSocketServer.java
  com.mprog.service.SessionSocketServer
 com/mprog/service/EchoProtocol.java
  com.mprog.service.EchoProtocol
 com/mprog/service/CheckingActivity.java
  com.mprog.service.CheckingActivity
-com/mprog/App.java
- com.mprog.App

@@ -76,7 +76,7 @@ public class CheckingActivity implements Runnable {
         }
     }
 
-    private PrintWriter getSocketOutputStream(String value) throws IOException {
+    protected PrintWriter getSocketOutputStream(String value) throws IOException {
         PrintWriter out = null;
         for (Map.Entry<String, Socket> entry : clientsSockets.entrySet()) {
             var name = entry.getKey();

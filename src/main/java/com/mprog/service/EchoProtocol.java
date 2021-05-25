@@ -1,6 +1,7 @@
 package com.mprog.service;
 
 import com.mprog.dto.MessageDto;
+import com.mprog.utill.Logger;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -12,10 +13,10 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Map;
 
-public class EchoProtocol implements Runnable{
+public class EchoProtocol implements Runnable {
 
     private final MessageService messageService = MessageService.getInstance();
-    private  PrintWriter clientOut;
+    private PrintWriter clientOut;
     private BufferedReader clientIn;
     private final SessionSocketServer sessionSocketServer;
     private final Socket socket;
@@ -28,7 +29,7 @@ public class EchoProtocol implements Runnable{
 
     @Override
     public void run() {
-        try(socket){
+        try (socket) {
             tryRun();
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
@@ -46,9 +47,29 @@ public class EchoProtocol implements Runnable{
             Thread.sleep(1000L);
             if (clientIn.ready()) {
                 var msg = clientIn.readLine();
-                checkMessageForResponse(msg);
+                if (!checkMessageForResponse(msg)) {
+                    var name = findName();
+                    if (pushToDbAndMail(msg, name)){
+                        Logger.log("message was mailed");
+                    }else {
+                        Logger.log("message was empty(null)");
+                    }
+                }
             }
         }
+    }
+
+    private boolean pushToDbAndMail(String msg, String name) {
+        if (!msg.equals("")) {
+            //
+            var messageDto = MessageDto.builder()
+                    .message(msg)
+                    .build();
+            messageService.create(messageDto);
+            mailMessages(msg, name);
+            return true;
+        }
+        return false;
     }
 
     private void showHistoryOfMessages(PrintWriter clientOut) {
@@ -56,21 +77,31 @@ public class EchoProtocol implements Runnable{
         history.forEach(messageDto -> clientOut.println(messageDto.getMessage()));
     }
 
-    private void checkMessageForResponse(String msg) {
+    private boolean checkMessageForResponse(String msg) {
         if (msg.startsWith("response:")) {
             response = msg;
+            return true;
         } else {
-            var name = findName();
-            if (!msg.equals("")) {
-                //
-                var messageDto = MessageDto.builder()
-                        .message(msg)
-                        .build();
-                messageService.create(messageDto);
-                mailMessages(msg, name);
-            }
+            return false;
         }
     }
+    //TODO "CC"
+//    private boolean checkMessageForResponse(String msg) {
+//        if (msg.startsWith("response:")) {
+//            response = msg;
+//            return true;
+//        } else {
+//            var name = findName();
+//            if (!msg.equals("")) {
+//                //
+//                var messageDto = MessageDto.builder()
+//                        .message(msg)
+//                        .build();
+//                messageService.create(messageDto);
+//                mailMessages(msg, name);
+//            }
+//        }
+//    }
 
     private void mailMessages(String msg, String name) {
         sessionSocketServer.getClientsName()
@@ -87,13 +118,13 @@ public class EchoProtocol implements Runnable{
                 .filter(value -> value.getKey().equals(this))
                 .map(Map.Entry::getValue)
                 .findAny();
-        if (optionalUserName.isPresent()){
+        if (optionalUserName.isPresent()) {
             userName = optionalUserName.get();
         }
         return userName;
     }
 
-    public PrintWriter getWriter(){
+    public PrintWriter getWriter() {
         return clientOut;
     }
 
