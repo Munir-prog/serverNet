@@ -20,23 +20,29 @@ class SessionSocketServerTest {
 
     private PrintWriter clientOut;
 
+    private SessionSocketServer sss;
+
     @BeforeEach
     void prepare() {
-
-    }
-    @Test
-    void givenSomeName_whenGetClientsName_thenReturnName() throws IOException {
         this.clientOut = Mockito.mock(PrintWriter.class);
         this.clientIn = Mockito.mock(BufferedReader.class);
+        this.sss = new SessionSocketServer(clientOut, clientIn);
+    }
 
-        SessionSocketServer sss = new SessionSocketServer(clientOut, clientIn);
+    @Test
+    void givenString_whenParseStringToInteger_thenReturnInteger(){
+        String test = "123";
+        var result = SessionSocketServer.parseStringToInteger(test);
+        Assertions.assertThat(result).isEqualTo(123);
+    }
+
+    @Test
+    void givenSomeName_whenGetClientsName_thenReturnName() throws IOException {
         String name = "Test";
-
 //        Mockito.doNothing().when(clientOut).println((String) Mockito.any());
         Mockito.doReturn(name).when(clientIn).readLine();
 
         Assertions.assertThat(sss.getClientName()).isEqualTo(name);
-
     }
 
 }

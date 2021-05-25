@@ -81,7 +81,7 @@ public class SessionSocketServer implements Runnable {
         }
     }
 
-    private static int parseStringToInteger(String s) {
+    protected static int parseStringToInteger(String s) {
         try {
             return Integer.parseInt(s);
         } catch (NumberFormatException e) {

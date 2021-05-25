@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.mprog.service.SessionSocketServerTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-05-25T08:44:55" hostname="asus" time="0.837">
+<testsuite name="com.mprog.service.SessionSocketServerTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2021-05-25T09:12:08" hostname="asus" time="1.035">
   <properties/>
-  <testcase name="givenSomeName_whenGetClientsName_thenReturnName()" classname="com.mprog.service.SessionSocketServerTest" time="0.837"/>
+  <testcase name="givenSomeName_whenGetClientsName_thenReturnName()" classname="com.mprog.service.SessionSocketServerTest" time="1.03"/>
+  <testcase name="startClient()" classname="com.mprog.service.SessionSocketServerTest" time="0.004"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
