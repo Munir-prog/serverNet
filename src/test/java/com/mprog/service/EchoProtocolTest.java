@@ -12,10 +12,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class EchoProtocolTest {
 
-//    @Mock
     private EchoProtocol echoProtocol;
 
-//    @Mock
     private SessionSocketServer sss;
 
     private Socket socket;

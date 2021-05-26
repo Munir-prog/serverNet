@@ -21,11 +21,11 @@ public class MessageService {
                 .toList();
     }
 
-    public Integer create(MessageDto messageDto) {
+    public void create(MessageDto messageDto) {
         var messageEntity = messageMapper.mapFrom(messageDto);
         messageDao.save(messageEntity);
 
-        return messageEntity.getId();
+//        return messageEntity.getId();
     }
 
     public static MessageService getInstance() {

@@ -7,6 +7,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -60,9 +61,30 @@ class UserDaoTest {
 
     @SneakyThrows
     @Test
-    void findByEmailAndPassword() {
+    void whenFindAll_thenSuccess() {
         var result = userDao.findAll();
 
         Assertions.assertThat(result).containsExactlyInAnyOrderElementsOf(dataForFindAll.users);
+    }
+
+    @Test
+    void whenFindByEmailAndPassword_thenSuccess(){
+        String email = "test2@mail.ru";
+        String password = "test2test2";
+        var user = Optional.of(User.builder().id(2).email(email).password(password).build());
+        System.out.println(user);
+
+        var result = userDao.findByEmailAndPassword(email, password);
+        Assertions.assertThat(result).isEqualTo(user);
+    }
+
+    @Test
+    void givenEntity_whenSave_thenReturnEntitySaved(){
+        var user = User.builder().email("test5@mail.ru").password("test5test5").build();
+
+        var result = userDao.save(user);
+
+        Assertions.assertThat(result.getEmail()).isEqualTo(user.getEmail());
+        Assertions.assertThat(result.getPassword()).isEqualTo(user.getPassword());
     }
 }

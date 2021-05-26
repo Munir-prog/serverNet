@@ -1,10 +1,10 @@
 com/mprog/utill/TestDataSource.java
  com.mprog.utill.TestDataSource
-com/mprog/service/EchoProtocolTest.java
- com.mprog.service.EchoProtocolTest
-com/mprog/dao/TestDataForFindAll.java
- com.mprog.dao.TestDataForFindAll
 com/mprog/dao/UserDaoTest.java
  com.mprog.dao.UserDaoTest
+com/mprog/dao/TestDataForFindAll.java
+ com.mprog.dao.TestDataForFindAll
 com/mprog/service/SessionSocketServerTest.java
  com.mprog.service.SessionSocketServerTest
+com/mprog/service/EchoProtocolTest.java
+ com.mprog.service.EchoProtocolTest
