@@ -53,8 +53,12 @@ public class SessionSocketServer implements Runnable {
         }
     }
 
+
+    // Метод в котором клиент либо регистрируется либо авторизуется
     @SneakyThrows
     private void authenticateClient(Socket clientSocket) {
+
+        // Тут мы получаем потоки ввода и вывода клиента
         clientOut = new PrintWriter(clientSocket.getOutputStream(), true,
                 StandardCharsets.UTF_8);
         clientIn = new BufferedReader(new InputStreamReader(clientSocket.getInputStream(),
@@ -65,9 +69,11 @@ public class SessionSocketServer implements Runnable {
             var s = clientIn.readLine();
             // ERROR of parsing NumberFormatException
             registrationAndLoginIndex = parseStringToInteger(s);
+            //Здесь клиент регистрируется и после сразу авторизуется для дальнейшей работы
             if (registrationAndLoginIndex == 1) {
                 registerClient();
                 loginClient();
+            // Тут если клиент уже зарегистрирован, он может сразу авторизоваться
             } else if (registrationAndLoginIndex == 2) {
                 loginClient();
             }
@@ -141,12 +147,6 @@ public class SessionSocketServer implements Runnable {
         }
         return name;
     }
-
-    //TODO "CC"
-//            var out = new PrintWriter(clientSocket.getOutputStream(), true,
-//                    StandardCharsets.UTF_8);
-//            var in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream(),
-//                    StandardCharsets.UTF_8));
 
     public Map<EchoProtocol, String> getClientsName() {
         return clientsName;

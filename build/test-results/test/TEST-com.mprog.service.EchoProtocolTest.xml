@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.mprog.service.EchoProtocolTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2021-05-25T15:49:07" hostname="asus" time="0.763">
+  <properties/>
+  <testcase name="shouldReturnFalseWhenGivenSomeMessageThatIsEmpty()" classname="com.mprog.service.EchoProtocolTest" time="0.607"/>
+  <testcase name="shouldReturnTrueWhenGivenSomeMessageThatNotEmpty()" classname="com.mprog.service.EchoProtocolTest" time="0.147"/>
+  <testcase name="shouldReturnFalseWhenGivenStringStartedWithoutResponse()" classname="com.mprog.service.EchoProtocolTest" time="0.003"/>
+  <testcase name="shouldReturnTrueWhenGivenStringStartedWithResponse()" classname="com.mprog.service.EchoProtocolTest" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

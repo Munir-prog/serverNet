@@ -59,9 +59,17 @@ public class EchoProtocol implements Runnable {
         }
     }
 
+    protected boolean checkMessageForResponse(String msg) {
+        if (msg.startsWith("response:")) {
+            response = msg;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     protected boolean pushToDbAndMail(String msg, String name) {
         if (!msg.equals("")) {
-            //
             var messageDto = MessageDto.builder()
                     .message(msg)
                     .build();
@@ -76,32 +84,6 @@ public class EchoProtocol implements Runnable {
         var history = messageService.getHistory();
         history.forEach(messageDto -> clientOut.println(messageDto.getMessage()));
     }
-
-    protected boolean checkMessageForResponse(String msg) {
-        if (msg.startsWith("response:")) {
-            response = msg;
-            return true;
-        } else {
-            return false;
-        }
-    }
-    //TODO "CC"
-//    private boolean checkMessageForResponse(String msg) {
-//        if (msg.startsWith("response:")) {
-//            response = msg;
-//            return true;
-//        } else {
-//            var name = findName();
-//            if (!msg.equals("")) {
-//                //
-//                var messageDto = MessageDto.builder()
-//                        .message(msg)
-//                        .build();
-//                messageService.create(messageDto);
-//                mailMessages(msg, name);
-//            }
-//        }
-//    }
 
     protected void mailMessages(String msg, String name) {
         sessionSocketServer.getClientsName()
