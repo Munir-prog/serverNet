@@ -22,6 +22,7 @@ public class PropertiesUtil {
     private static void loadProperties() {
         try (var resourceAsStream = PropertiesUtil.class.getClassLoader().getResourceAsStream("application.properties")) {
             PROPERTIES.load(resourceAsStream);
+
         }
     }
 
